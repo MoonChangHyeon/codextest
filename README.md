@@ -4,19 +4,22 @@ This repository contains a minimal Java web server example that listens on port 
 
 ## Running the server
 
-1. Compile the Java source:
+You need [Maven](https://maven.apache.org/) installed.
+
+1. Build and run directly with Maven:
 
    ```bash
-   javac src/Main.java
-   ```
-
-2. Run the server:
-
-   ```bash
-   java -cp src Main
+   mvn compile exec:java
    ```
 
    The server will start and print `Server running on http://localhost:9099`.
+
+2. Alternatively, package the project and run the class manually:
+
+   ```bash
+   mvn package
+   java -cp target/classes com.example.Main
+   ```
 
 3. Open your browser and navigate to `http://localhost:9099`. You will see a drop-down menu for choosing a language. Selecting one displays the file extension and an example Fortify command.
 
@@ -26,7 +29,7 @@ If you have Fortify SCA installed, you can analyze this project as follows:
 
 ```bash
 sourceanalyzer -b codextest -clean
-sourceanalyzer -b codextest javac src/Main.java
+sourceanalyzer -b codextest mvn -q compile
 sourceanalyzer -b codextest -scan -f codextest.fpr
 ```
 
